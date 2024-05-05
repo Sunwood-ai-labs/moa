@@ -95,6 +95,11 @@ upload: ./.env_sample to s3://test-20210711/.env_sample
 
 おめでとうございます！Docker コンテナ内で AWS CLI v2 を設定して使用することに成功しました。
 
+
+## 📚 サンプルスクリプト
+
+AWS Bedrock の使用例を示すサンプルスクリプトが `example` ディレクトリに含まれています。詳細については、[example/README.md](example/README.md) を参照してください。
+
 ## 🛠️ プロジェクト構造
 
 プロジェクトの構造は次のようになっています。
