@@ -1,15 +1,3 @@
----
-title: HarmonAI II
-emoji: 🌖
-colorFrom: purple
-colorTo: gray
-sdk: streamlit
-sdk_version: 1.33.0
-app_file: app.py
-pinned: false
-license: mit
----
-
 
 <p align="center">
 <img src="docs/moa_icon.jpeg" width="100%">
