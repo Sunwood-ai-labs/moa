@@ -24,6 +24,7 @@
 >[!IMPORTANT]
 >このリポジトリは[SourceSage](https://github.com/Sunwood-ai-labs/SourceSage)を活用しており、リリースノートやREADME、コミットメッセージの9割は[SourceSage](https://github.com/Sunwood-ai-labs/SourceSage) ＋ [claude.ai](https://claude.ai/)で生成しています。
 
+
 ## 🌟 はじめに
 
 MOA (Magic of AWS) は、初心者でも Docker を使って AWS CLI v2 を簡単に使えるようにすることを目的としたプロジェクトです。Docker を利用することで、AWS CLI がプリインストールされた独立した環境を作成でき、ローカルマシンの設定を変更する必要がなくなります。
@@ -52,14 +53,23 @@ git clone https://github.com/Sunwood-ai-labs/MOA.git
 cd MOA
 ```
 
-3. プロジェクトルートに `.env` ファイルを作成し、AWS アクセスキー ID とシークレットアクセスキーを追加します。
+3. プロジェクトルートに `.env` ファイルを作成し、AWS アクセスキー ID とシークレットアクセスキー、およびその他の設定を追加します。
 
 ```plaintext
 AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY
+AWS_REGION_NAME=your-preferred-region
+AWS_DEFAULT_REGION=your-preferred-region 
+AWS_DEFAULT_OUTPUT=json
+
+# Optionally add other API keys
+# ANTHROPIC_API_KEY=your-anthropic-api-key
+# GEMINI_API_KEY=your-gemini-api-key
+# GOOGLE_API_KEY=your-google-api-key
 ```
 
-> ⚠️ **重要**: 機密性の高い AWS 認証情報を誤ってコミットしないように、必ず `.env` ファイルを `.gitignore` に追加してください。
+>[!IMPORTANT]
+機密性の高い AWS 認証情報を誤ってコミットしないように、必ず `.env` ファイルを `.gitignore` に追加してください。
 
 ### 使い方
 
@@ -98,7 +108,7 @@ upload: ./.env_sample to s3://test-20210711/.env_sample
 
 ## 📚 サンプルスクリプト
 
-AWS Bedrock の使用例を示すサンプルスクリプトが `example` ディレクトリに含まれています。詳細については、[example/README.md](example/README.md) を参照してください。
+AWS Bedrock やその他のサービスの使用例を示すサンプルスクリプトが `example` ディレクトリに含まれています。詳細については、[example/README.md](example/README.md) を参照してください。
 
 ## 🛠️ プロジェクト構造
 
@@ -115,6 +125,14 @@ AWS Bedrock の使用例を示すサンプルスクリプトが `example` ディ
 ├── README.md             # プロジェクトのドキュメント
 ├── app.py                # メインアプリケーションファイル
 ├── docker-compose.yml    # Docker Compose 設定
+├── example/              # サンプルスクリプトディレクトリ
+│   ├── 01_list_bedrock_models.py       # Bedrock モデルの一覧を取得するサンプル
+│   ├── 02_bedrock_text_generation.py   # Bedrock を使用したテキスト生成のサンプル
+│   ├── 03_litellm_claude.py            # LiteLLM と Claude AI を使用したチャットのサンプル
+│   ├── 04_aws_claude_chatbot.py        # AWS Claude AI を使用したチャットボットのサンプル
+│   ├── 05_gemini_chat.py               # Gemini API を使用したチャットのサンプル  
+│   └── README.md         # サンプルスクリプトの説明
+├── requirements.txt      # 必要な Python パッケージのリスト
 └── docs/                 # ドキュメントファイル
     ├── moa_icon.jpeg     # プロジェクトアイコン
     └── page_front.md     # フロントページのドキュメント
@@ -122,7 +140,7 @@ AWS Bedrock の使用例を示すサンプルスクリプトが `example` ディ
 
 ## 📝 更新情報
 
-更新情報とリリースノートについては、[GitHub リリース](https://github.com/Sunwood-ai-labs/MOA/releases)ページを参照してください。
+リリースノートについては、[GitHub リリース](https://github.com/Sunwood-ai-labs/MOA/releases)ページを参照してください。
 
 ## 🤝 コントリビューション
 
@@ -147,6 +165,9 @@ MOA の開発に影響を与え、貢献してくれた以下のプロジェク�
 - [Docker Compose](https://docs.docker.com/compose/)
 - [Python](https://www.python.org/)
 - [Streamlit](https://streamlit.io/)
+- [LiteLLM](https://github.com/Lightning-AI/lit-llama)
+- [Gemini API](https://www.gemini.com/developers)  
+- [Anthropic API](https://www.anthropic.com/)
 
 ## 📧 お問い合わせ
 
