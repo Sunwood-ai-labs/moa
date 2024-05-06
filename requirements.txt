@@ -1,0 +1,5 @@
+boto3
+art
+termcolor
+litellm
+google-generativeai
