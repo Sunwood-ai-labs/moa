@@ -6,7 +6,4 @@ services:
       - .:/app
     env_file:
       - .env
-    environment:
-      AWS_DEFAULT_REGION: us-east-2
-      AWS_DEFAULT_OUTPUT: json
     tty: true
