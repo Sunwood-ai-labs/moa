@@ -24,7 +24,6 @@
 >[!IMPORTANT]
 >このリポジトリは[SourceSage](https://github.com/Sunwood-ai-labs/SourceSage)を活用しており、リリースノートやREADME、コミットメッセージの9割は[SourceSage](https://github.com/Sunwood-ai-labs/SourceSage) ＋ [claude.ai](https://claude.ai/)で生成しています。
 
-
 ## 🌟 はじめに
 
 MOA (Magic of AWS) は、初心者でも Docker を使って AWS CLI v2 を簡単に使えるようにすることを目的としたプロジェクトです。Docker を利用することで、AWS CLI がプリインストールされた独立した環境を作成でき、ローカルマシンの設定を変更する必要がなくなります。
@@ -62,14 +61,17 @@ AWS_REGION_NAME=your-preferred-region
 AWS_DEFAULT_REGION=your-preferred-region 
 AWS_DEFAULT_OUTPUT=json
 
-# Optionally add other API keys
-# ANTHROPIC_API_KEY=your-anthropic-api-key
-# GEMINI_API_KEY=your-gemini-api-key
-# GOOGLE_API_KEY=your-google-api-key
+OLLAMA_BASE_URL=http://ollama:11434
+WEBUI_SECRET_KEY=sk-1234
+LITELLM_PROXY_HOST=0.0.0.0
+OPEN_WEBUI_PORT=8080
 ```
 
 >[!IMPORTANT]
-機密性の高い AWS 認証情報を誤ってコミットしないように、必ず `.env` ファイルを `.gitignore` に追加してください。
+>.env.exampleファイルに新しい環境変数 `OLLAMA_BASE_URL`, `WEBUI_SECRET_KEY`, `LITELLM_PROXY_HOST`, `OPEN_WEBUI_PORT` が追加されました。APIキーの設定も更新されています。
+>
+>機密性の高い AWS 認証情報を誤ってコミットしないように、必ず `.env` ファイルを `.gitignore` に追加してください。
+
 
 ### 使い方
 
@@ -84,7 +86,7 @@ docker-compose up
 3. コンテナが起動したら、次のコマンドを実行してコンテナ内で Bash シェルを開きます。
 
 ```bash
-docker-compose run exec app /bin/bash
+docker-compose exec app /bin/zsh
 ```
 
 4. コンテナ内で、AWS CLI コマンドを使用できるようになりました。例えば、S3 バケットを作成してファイルをアップロードしてみましょう。
@@ -106,6 +108,17 @@ upload: ./.env_sample to s3://test-20210711/.env_sample
 おめでとうございます！Docker コンテナ内で AWS CLI v2 を設定して使用することに成功しました。
 
 
+## ollama webui
+
+新しく `docker-compose.ollama.yml` ファイルが追加され、ollamaとwebuiサービスの詳細な構成が定義されました。
+以下のコマンドでollamaのWebUIを起動できます。
+
+```bash
+docker-compose -f docker-compose.ollama.yml up
+```
+
+また、`config.yaml` ファイルに複数のモデル設定が追加されました。litellmの設定でモデルのAPIエンドポイントとキーを指定する方法が示され、各モデルについての詳細な設定情報が含まれています。
+
 ## 📚 サンプルスクリプト
 
 AWS Bedrock やその他のサービスの使用例を示すサンプルスクリプトが `example` ディレクトリに含まれています。詳細については、[example/README.md](example/README.md) を参照してください。
@@ -125,6 +138,7 @@ AWS Bedrock やその他のサービスの使用例を示すサンプルスク�
 ├── README.md             # プロジェクトのドキュメント
 ├── app.py                # メインアプリケーションファイル
 ├── docker-compose.yml    # Docker Compose 設定
+├── docker-compose.ollama.yml # ollama と webui の Docker Compose 設定
 ├── example/              # サンプルスクリプトディレクトリ
 │   ├── 01_list_bedrock_models.py       # Bedrock モデルの一覧を取得するサンプル
 │   ├── 02_bedrock_text_generation.py   # Bedrock を使用したテキスト生成のサンプル
