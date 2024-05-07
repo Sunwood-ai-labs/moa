@@ -160,3 +160,6 @@ cython_debug/
 #.idea/
 
 SourceSageAssets
+
+!data/ollama/.gitKeep
+data/ollama

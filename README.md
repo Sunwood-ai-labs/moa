@@ -84,7 +84,7 @@ docker-compose up
 3. コンテナが起動したら、次のコマンドを実行してコンテナ内で Bash シェルを開きます。
 
 ```bash
-docker-compose run exec app /bin/bash
+>docker-compose exec app /bin/zsh
 ```
 
 4. コンテナ内で、AWS CLI コマンドを使用できるようになりました。例えば、S3 バケットを作成してファイルをアップロードしてみましょう。
@@ -105,6 +105,12 @@ upload: ./.env_sample to s3://test-20210711/.env_sample
 
 おめでとうございます！Docker コンテナ内で AWS CLI v2 を設定して使用することに成功しました。
 
+
+## ollama webui
+
+```bash
+docker-compose -f docker-compose.ollama.yml up
+```
 
 ## 📚 サンプルスクリプト
 
