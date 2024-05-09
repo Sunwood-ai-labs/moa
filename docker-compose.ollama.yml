@@ -6,7 +6,7 @@ services:
     ports:
       - "11434:11434" 
     volumes:
-      - ./data/ollama:/root/.ollama
+      - ollama-moa2:/root/.ollama
     env_file:
       - .env
     pull_policy: always
@@ -26,23 +26,40 @@ services:
       context: .
       args:
         OLLAMA_BASE_URL: '/ollama'
-      dockerfile: Dockerfile
-    image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG-main}
+      dockerfile: Dockerfile.openweb.ui
+      # dockerfile: Dockerfile
+    image: ghcr.io/open-webui/open-webui:main
     volumes:
-      - open-webui:/app/backend/data
+      - open-webui-moa2:/app/backend/data
       - ./data/litellm/config.yaml:/app/backend/data/litellm/config.yaml
+      - ./:/work
     depends_on:
       - ollama
     ports:
       - ${OPEN_WEBUI_PORT-3000}:8080
-      - 14365:14365
+      # - 14365:14365
     env_file:
       - .env
 
-    extra_hosts:
-      - host.docker.internal:host-gateway
+    # extra_hosts:
+    #   - host.docker.internal:host-gateway
     restart: unless-stopped
 
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    volumes:  
+      - ./data/litellm/config.yaml:/app/config.yaml
+    ports:
+      - "14365:14365"
+    command:
+      - /bin/sh
+      - -c  
+      - |
+        pip install async_generator
+        litellm --config '/app/config.yaml' --debug --host 0.0.0.0 --port 14365 --num_workers 8
+    entrypoint: []
+    env_file:
+      - .env
 volumes:
-  ollama: {}
-  open-webui: {}
+  ollama-moa2: {}
+  open-webui-moa2: {}
