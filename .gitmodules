@@ -1,0 +1,6 @@
+[submodule "open-webui"]
+	path = open-webui
+	url = https://github.com/open-webui/open-webui.git
+[submodule "ollama-webui"]
+	path = ollama-webui
+	url = https://github.com/Sunwood-ai-labs/ollama-webui.git
