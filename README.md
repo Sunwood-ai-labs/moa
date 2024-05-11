@@ -24,9 +24,12 @@
 >[!IMPORTANT]
 >このリポジトリは[SourceSage](https://github.com/Sunwood-ai-labs/SourceSage)を活用しており、リリースノートやREADME、コミットメッセージの9割は[SourceSage](https://github.com/Sunwood-ai-labs/SourceSage) ＋ [claude.ai](https://claude.ai/)で生成しています。
 
+
+
 ## 🌟 はじめに
 
-MOA (Magic of AWS) は、初心者でも Docker を使って AWS CLI v2 を簡単に使えるようにすることを目的としたプロジェクトです。Docker を利用することで、AWS CLI がプリインストールされた独立した環境を作成でき、ローカルマシンの設定を変更する必要がなくなります。
+MOA (Magic of AWS) は、AWSのBedrockを使用して、クラウド環境における厳しい要求を持つ企業でもDockerを介して簡単にLLM（Large Language Models）関連のサービスを利用できるようにすることを目的としたプロジェクトです。このプロジェクトでは、AWS CLIがプリインストールされた独立した開発環境を提供し、高度なセキュリティとプライバシーを保ちながら、企業がAI技術を効果的に活用できるよう支援します。MOAを使用することで、ユーザーはローカルマシンの設定を変更することなく、セキュアで独立した環境から直接AWSリソースを管理し、先進的なAI機能を実装することが可能になります。
+
 
 ## 🚀 始め方
 
@@ -72,7 +75,6 @@ OPEN_WEBUI_PORT=8080
 >
 >機密性の高い AWS 認証情報を誤ってコミットしないように、必ず `.env` ファイルを `.gitignore` に追加してください。
 
-
 ### 使い方
 
 1. Visual Studio Code でプロジェクトを開きます。
@@ -108,7 +110,7 @@ upload: ./.env_sample to s3://test-20210711/.env_sample
 おめでとうございます！Docker コンテナ内で AWS CLI v2 を設定して使用することに成功しました。
 
 
-## ollama webui
+## 📚 ollama webui
 
 新しく `docker-compose.ollama.yml` ファイルが追加され、ollamaとwebuiサービスの詳細な構成が定義されました。
 以下のコマンドでollamaのWebUIを起動できます。
@@ -118,6 +120,7 @@ docker-compose -f docker-compose.ollama.yml up
 ```
 
 また、`config.yaml` ファイルに複数のモデル設定が追加されました。litellmの設定でモデルのAPIエンドポイントとキーを指定する方法が示され、各モデルについての詳細な設定情報が含まれています。
+
 
 ## 📚 サンプルスクリプト
 
