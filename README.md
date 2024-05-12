@@ -1,6 +1,6 @@
 
 <p align="center">
-<img src="docs/moa_icon.jpeg" width="100%">
+<img src="https://huggingface.co/datasets/MakiAi/IconAssets/resolve/main/moa_icon.jpeg" width="100%">
 <br>
 <h1 align="center">MOA</h1>
 <h2 align="center">
