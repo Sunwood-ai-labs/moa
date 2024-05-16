@@ -51,6 +51,7 @@ services:
       - ./data/litellm/config.yaml:/app/config.yaml
     ports:
       - "14365:14365"
+    restart: unless-stopped
     command:
       - /bin/sh
       - -c  
