@@ -4,3 +4,6 @@
 [submodule "ollama-webui"]
 	path = ollama-webui
 	url = https://github.com/Sunwood-ai-labs/ollama-webui.git
+[submodule "langfuse"]
+	path = langfuse
+	url = https://github.com/Sunwood-ai-labs/langfuse.git
