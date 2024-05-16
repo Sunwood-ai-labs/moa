@@ -1,6 +1,6 @@
 
 <p align="center">
-<img src="docs/moa_icon.jpeg" width="100%">
+<img src="https://huggingface.co/datasets/MakiAi/IconAssets/resolve/main/moa_icon.jpeg" width="100%">
 <br>
 <h1 align="center">MOA</h1>
 <h2 align="center">
@@ -25,15 +25,17 @@
 >このリポジトリは[SourceSage](https://github.com/Sunwood-ai-labs/SourceSage)を活用しており、リリースノートやREADME、コミットメッセージの9割は[SourceSage](https://github.com/Sunwood-ai-labs/SourceSage) ＋ [claude.ai](https://claude.ai/)で生成しています。
 
 
+
 ## 🌟 はじめに
 
-MOA (Magic of AI on AWS) は、初心者でも Docker を使って AWS 上の最先端の AI サービスを簡単に体験できるようにすることを目的としたプロジェクトです。Docker を利用することで、AWS CLI やその他のツールがプリインストールされた独立した環境を作成でき、ローカルマシンの設定を変更する必要がなくなります。
+MOA (Magic of AWS) は、AWSのBedrockを使用して、クラウド環境における厳しい要求を持つ企業でもDockerを介して簡単にLLM（Large Language Models）関連のサービスを利用できるようにすることを目的としたプロジェクトです。このプロジェクトでは、AWS CLIがプリインストールされた独立した開発環境を提供し、高度なセキュリティとプライバシーを保ちながら、企業がAI技術を効果的に活用できるよう支援します。MOAを使用することで、ユーザーはローカルマシンの設定を変更することなく、セキュアで独立した環境から直接AWSリソースを管理し、先進的なAI機能を実装することが可能になります。
 
 主な特徴:
 - AWS BedrockやAWS Claued AIなどの最新のAIサービスを手軽に試せます
 - LiteLLMプロジェクトを利用して、多様なLLMモデルを統一的なインターフェースで利用できます
 - OLLaMaのWeb UIを利用して、独自のLLMモデルをチャットボットとして動作させられます
 - Streamlitアプリを通して、GPTやLLMモデルの能力をビジュアルに体験できます
+
 
 ## 🚀 始め方
 
@@ -81,7 +83,6 @@ OPEN_WEBUI_PORT=8080
 >
 >機密性の高い AWS 認証情報を誤ってコミットしないように、必ず `.env` ファイルを `.gitignore` に追加してください。
 
-
 ### 使い方
 
 1. Visual Studio Code でプロジェクトを開きます。
@@ -105,7 +106,7 @@ docker-compose exec app /bin/zsh
 4. コンテナ内で、AWS CLI コマンドを使用できるようになりました。また、http://localhost:8501 にアクセスすることでStreamlitアプリを開くことができます。
 
 
-## ollama webui
+## 📚 ollama webui
 
 新しく `docker-compose.ollama.yml` ファイルが追加され、ollamaとwebuiサービスの詳細な構成が定義されました。  
 以下のコマンドでollamaのWebUIを起動できます。
@@ -139,6 +140,7 @@ OPENAI_API_KEY=your_openai_api_key
 ```
 
 langfuse は http://localhost:3000 で利用可能です。
+
 
 ## 📚 サンプルスクリプト
 
