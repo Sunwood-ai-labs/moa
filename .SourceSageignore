@@ -24,3 +24,8 @@ sourcesage.egg-info
 dist
 build
 ollama-webui
+langfuse
+.env
+.SourceSageignore
+.SourceSageAssets
+.Gaiah.md

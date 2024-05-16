@@ -2,7 +2,9 @@
 litellm_settings:
   drop_params: true
   set_verbose: true
-
+  success_callback: ["langfuse"]
+  failure_callback: ["langfuse"]
+  
 model_list:
 - litellm_params:
     api_base: http://ollama:11434/v1

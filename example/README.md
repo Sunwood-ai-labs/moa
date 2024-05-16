@@ -45,4 +45,11 @@
 2. gemini/gemini-pro モデルを指定
 3. ユーザーメッセージを送信し、応答を出力
 
+
+## 06_langfuse_openai_chat_completion.py
+
+docker-compose -f langfuse\docker-compose.yml up 
+
+http://localhost:3000/
+
 これらのスクリプトを参考に、AWS Bedrock や他のサービスの機能を活用したアプリケーションを開発できます。各スクリプトには、使用例とステップバイステップの説明が含まれています。
