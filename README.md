@@ -119,6 +119,16 @@ docker-compose -f docker-compose.ollama.yml up
 
 また、`config.yaml` ファイルに複数のモデル設定が追加されました。litellmの設定でモデルのAPIエンドポイントとキーを指定する方法が示され、各モデルについての詳細な設定情報が含まれています。
 
+## ollama webui + langfuse
+
+新しく `docker-compose.ollama.yml` ファイルが追加され、ollamaとwebuiサービスの詳細な構成が定義されました。
+以下のコマンドでollamaのWebUIを起動できます。
+
+```bash
+docker-compose -f docker-compose.ollama.yml -f langfuse\docker-compose.yml up
+```
+
+
 ## 📚 サンプルスクリプト
 
 AWS Bedrock やその他のサービスの使用例を示すサンプルスクリプトが `example` ディレクトリに含まれています。詳細については、[example/README.md](example/README.md) を参照してください。
