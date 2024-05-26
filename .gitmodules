@@ -1,9 +1,9 @@
-[submodule "open-webui"]
-	path = open-webui
-	url = https://github.com/open-webui/open-webui.git
-[submodule "ollama-webui"]
-	path = ollama-webui
+[submodule "spellbook/ollama-webui"]
+	path = spellbook/ollama-webui
 	url = https://github.com/Sunwood-ai-labs/ollama-webui.git
-[submodule "langfuse"]
-	path = langfuse
+[submodule "spellbook/langfuse"]
+	path = spellbook/langfuse
 	url = https://github.com/Sunwood-ai-labs/langfuse.git
+[submodule "spellbook/dify"]
+	path = spellbook/dify
+	url = https://github.com/Sunwood-ai-labs/dify.git

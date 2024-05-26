@@ -1,0 +1,193 @@
+app:
+  description: ''
+  icon: "\U0001F916"
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 'Knowledge Retreival + Chatbot '
+workflow:
+  features:
+    file_upload:
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+    opening_statement: ''
+    retriever_resource:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: start
+        targetType: knowledge-retrieval
+      id: 1711528914102-1711528915811
+      source: '1711528914102'
+      sourceHandle: source
+      target: '1711528915811'
+      targetHandle: target
+      type: custom
+    - data:
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1711528915811-1711528917469
+      source: '1711528915811'
+      sourceHandle: source
+      target: '1711528917469'
+      targetHandle: target
+      type: custom
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: 1711528917469-1711528919501
+      source: '1711528917469'
+      sourceHandle: source
+      target: '1711528919501'
+      targetHandle: target
+      type: custom
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: Start
+        type: start
+        variables: []
+      height: 54
+      id: '1711528914102'
+      position:
+        x: 79.5
+        y: 2634.5
+      positionAbsolute:
+        x: 79.5
+        y: 2634.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - 1577f335-8b7c-4586-ad4e-3afa48b4b246
+        desc: Allows you to query text content related to user questions from the
+          Knowledge
+        query_variable_selector:
+        - '1711528914102'
+        - sys.query
+        retrieval_mode: single
+        selected: true
+        single_retrieval_config:
+          model:
+            completion_params:
+              frequency_penalty: 0
+              max_tokens: 512
+              presence_penalty: 0
+              temperature: 0
+              top_p: 1
+            mode: chat
+            name: anthropic.claude-3-haiku-20240307-v1:0
+            provider: bedrock
+        title: Knowledge Retrieval
+        type: knowledge-retrieval
+      dragging: false
+      height: 140
+      id: '1711528915811'
+      position:
+        x: 362.5
+        y: 2634.5
+      positionAbsolute:
+        x: 362.5
+        y: 2634.5
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: Invoking large language models to answer questions or process natural
+          language
+        memory:
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            frequency_penalty: 0
+            max_tokens: 512
+            presence_penalty: 0
+            temperature: 0.7
+            top_p: 1
+          mode: chat
+          name: anthropic.claude-3-haiku-20240307-v1:0
+          provider: bedrock
+        prompt_template:
+        - id: 92b6f208-c181-4492-a612-625713970393
+          role: system
+          text: "You are a helpful assistant. \nUse the following context as your\
+            \ learned knowledge, inside <context></context> XML tags.\n<context>\n\
+            {{#context#}}\n</context>\nWhen answer to user:\n- If you don't know,\
+            \ just say that you don't know.\n- If you don't know when you are not\
+            \ sure, ask for clarification.\nAvoid mentioning that you obtained the\
+            \ information from the context.\nAnd answer according to the language\
+            \ of the user's question."
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: true
+      height: 164
+      id: '1711528917469'
+      position:
+        x: 645.5
+        y: 2634.5
+      positionAbsolute:
+        x: 645.5
+        y: 2634.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1711528917469.text#}}'
+        desc: ''
+        selected: false
+        title: Answer
+        type: answer
+        variables: []
+      height: 106
+      id: '1711528919501'
+      position:
+        x: 928.5
+        y: 2634.5
+      positionAbsolute:
+        x: 928.5
+        y: 2634.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 199.38908766521217
+      y: -2180.7678028555374
+      zoom: 0.9753554615276419

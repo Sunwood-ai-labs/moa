@@ -25,17 +25,18 @@
 >このリポジトリは[SourceSage](https://github.com/Sunwood-ai-labs/SourceSage)を活用しており、リリースノートやREADME、コミットメッセージの9割は[SourceSage](https://github.com/Sunwood-ai-labs/SourceSage) ＋ [claude.ai](https://claude.ai/)で生成しています。
 
 
+以下は修正・添削後のREADME文書です。誤字の修正、言い回しの最適化、そして技術用語の統一を行いました。
+
+---
 
 ## 🌟 はじめに
 
-MOA (Magic of AWS) は、AWSのBedrockを使用して、クラウド環境における厳しい要求を持つ企業でもDockerを介して簡単にLLM（Large Language Models）関連のサービスを利用できるようにすることを目的としたプロジェクトです。このプロジェクトでは、AWS CLIがプリインストールされた独立した開発環境を提供し、高度なセキュリティとプライバシーを保ちながら、企業がAI技術を効果的に活用できるよう支援します。MOAを使用することで、ユーザーはローカルマシンの設定を変更することなく、セキュアで独立した環境から直接AWSリソースを管理し、先進的なAI機能を実装することが可能になります。
+MOA (Magic of AWS) は、AWSの基盤技術を活用し、Dockerを通じて企業がクラウド環境でLLM（Large Language Models）を簡単に利用できるようにするプロジェクトです。AWS CLIがプリインストールされた独立した開発環境を提供することで、企業が高度なセキュリティとプライバシーを保ちつつ、AI技術を効果的に活用できるよう支援します。MOAを使用することで、ユーザーはローカルマシンの設定を変更せずに、セキュアな環境から直接AWSリソースを管理し、先進的なAI機能を実装できます。
 
 主な特徴:
-- AWS BedrockやAWS Claued AIなどの最新のAIサービスを手軽に試せます
-- LiteLLMプロジェクトを利用して、多様なLLMモデルを統一的なインターフェースで利用できます
-- OLLaMaのWeb UIを利用して、独自のLLMモデルをチャットボットとして動作させられます
-- Streamlitアプリを通して、GPTやLLMモデルの能力をビジュアルに体験できます
-
+- AWS BedrockやAWS Cloud AIなどの最新AIサービスを手軽に試すことができます。
+- LiteLLMプロジェクトを利用して、多様なLLMモデルを統一的なインターフェースで活用できます。
+- Ollama WebUIを使い、独自のLLMモデルをチャットボットとして動作させることができます。
 
 ## 🚀 始め方
 
@@ -45,29 +46,26 @@ MOA (Magic of AWS) は、AWSのBedrockを使用して、クラウド環境にお
 
 - Docker
 - Docker Compose
-- Visual Studio Code (オプションですが、より良い開発体験のために推奨されます)
+- Visual Studio Code（オプションですが、より良い開発体験のために推奨します）
 
 ### インストール
 
 1. リポジトリをクローンします。
-
 ```bash
 git clone https://github.com/Sunwood-ai-labs/MOA.git
 ```
 
 2. プロジェクトディレクトリに移動します。
-
 ```bash
 cd MOA
 ```
 
-3. プロジェクトルートに `.env` ファイルを作成し、AWS アクセスキー ID とシークレットアクセスキー、およびその他の設定を追加します。
-
+3. プロジェクトルートに`.env`ファイルを作成し、AWSアクセスキーID、シークレットアクセスキー、その他の設定を追加します。
 ```plaintext
 AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY
 AWS_REGION_NAME=your-preferred-region
-AWS_DEFAULT_REGION=your-preferred-region 
+AWS_DEFAULT_REGION=your-preferred-region
 AWS_DEFAULT_OUTPUT=json
 
 # ANTHROPIC_API_KEY=sk-ant-XXXXX
@@ -79,68 +77,49 @@ OPEN_WEBUI_PORT=8080
 ```
 
 >[!IMPORTANT]
->.env.exampleファイルに新しい環境変数 `OLLAMA_BASE_URL`, `WEBUI_SECRET_KEY`, `LITELLM_PROXY_HOST`, `OPEN_WEBUI_PORT` が追加されました。APIキーの設定も更新されています。
+>`.env.example`ファイルに新しい環境変数 `OLLAMA_BASE_URL`, `WEBUI_SECRET_KEY`, `LITELLM_PROXY_HOST`, `OPEN_WEBUI_PORT` が追加されました。APIキーの設定も更新されています。
 >
->機密性の高い AWS 認証情報を誤ってコミットしないように、必ず `.env` ファイルを `.gitignore` に追加してください。
+>機密性の高い AWS 認証情報を誤ってコミットしないように、必ず`.env`ファイルを`.gitignore`に追加してください。
 
 ### 使い方
 
-1. Visual Studio Code でプロジェクトを開きます。
+#### ollama webui
 
-2. VS Code でターミナルを開き、以下のコマンドを実行して Docker コンテナをビルドして起動します。
+1. Visual Studio Codeでプロジェクトを開きます。
 
-```bash
-# AWS CLIとStreamlitアプリを起動
-docker-compose up
-
-# ollama webui を追加で起動
-docker-compose -f docker-compose.ollama.yml up
-```
-
-3. コンテナが起動したら、次のコマンドを実行してコンテナ内で Bash シェルを開きます。
-
-```bash
-docker-compose exec app /bin/zsh
-```
-
-4. コンテナ内で、AWS CLI コマンドを使用できるようになりました。また、http://localhost:8501 にアクセスすることでStreamlitアプリを開くことができます。
-
-
-## 📚 ollama webui
-
-新しく `docker-compose.ollama.yml` ファイルが追加され、ollamaとwebuiサービスの詳細な構成が定義されました。  
-以下のコマンドでollamaのWebUIを起動できます。
-
-```bash
-docker-compose -f docker-compose.ollama.yml up
-```
-
-`docker-compose.ollama.yml`では以下のサービスが定義されています:
+2. VS Codeのターミナルを開き、以下のコマンドを実行してDockerコンテナをビルドし、起動します。
+    ```bash
+    # Ollama WebUI を追加で起動
+    docker-compose -f docker-compose.ollama.yml up
+    ```
 
 - ollama: LLMモデルを提供するメインのサービス。GPU利用の設定も可能。
 - open-webui: ollama WebUIを提供するサービス。デフォルトでポート8080をリッスン。
 - litellm: 各種LLMモデルへのアクセスを提供するサービス。
 
+#### ollama webui + langfuse の起動方法
 
-## ollama webui + langfuse
+1. 必要な環境変数を`.env`ファイルに設定します。`LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`が必要です。
+   ```plaintext
+   LANGFUSE_PUBLIC_KEY=your_langfuse_public_key
+   LANGFUSE_SECRET_KEY=your_langfuse_secret_key
+   ```
 
-新しく langfuse サブモジュールが追加され、OpenAI APIなどを経由したGPTモデルの利用が可能になりました。
-以下のコマンドでlangfuseを含めてすべてのサービスを起動できます。
+2. 以下のコマンドを使用して、ollama webuiとlangfuseを含むすべての関連サービスを起動します。
+   ```bash
+   docker-compose -f docker-compose.ollama.yml -f langfuse/docker-compose.yml up
+   ```
 
-```bash
-docker-compose -f docker-compose.ollama.yml -f langfuse\docker-compose.yml up
-```
+   このコマンドにより、ollamaとlangfuse関連のサービスが一緒に起動されます。`langfuse`は`http://localhost:3000`でアクセス可能です。
 
-langfuse の設定には以下の環境変数の設定が必要です。
+#### Dify の起動方法
 
-```plaintext
-LANGFUSE_PUBLIC_KEY=your_langfuse_public_key
-LANGFUSE_SECRET_KEY=your_langfuse_secret_key 
-OPENAI_API_KEY=your_openai_api_key
-```
+1. Dify関連のサービスを起動するには、次のコマンドを実行します。
+   ```bash
+   docker-compose -f spellbook/dify/docker/docker-compose.yaml up
+   ```
 
-langfuse は http://localhost:3000 で利用可能です。
-
+   このコマンドは、`spellbook`ディレクトリ内の`dify`サブディレクトリにあるDocker Compose設定ファイルを使用して、Difyサービスを起動します。
 
 ## 📚 サンプルスクリプト
 
