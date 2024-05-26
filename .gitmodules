@@ -4,3 +4,6 @@
 [submodule "spellbook/langfuse"]
 	path = spellbook/langfuse
 	url = https://github.com/Sunwood-ai-labs/langfuse.git
+[submodule "spellbook/dify"]
+	path = spellbook/dify
+	url = https://github.com/Sunwood-ai-labs/dify.git
