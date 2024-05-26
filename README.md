@@ -142,6 +142,12 @@ OPENAI_API_KEY=your_openai_api_key
 langfuse は http://localhost:3000 で利用可能です。
 
 
+## Dify
+
+```bash
+docker-compose -f spellbook\dify\docker\docker-compose.yaml up
+```
+
 ## 📚 サンプルスクリプト
 
 AWS Bedrock や Claude AI、LiteLLM、Gemini APIなどの使用例を示すサンプルスクリプトが `example` ディレクトリに含まれています。詳細については、[example/README.md](example/README.md) を参照してください。 
