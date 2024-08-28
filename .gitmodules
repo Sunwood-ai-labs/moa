@@ -1,6 +1,3 @@
-[submodule "spellbook/ollama-webui"]
-	path = spellbook/ollama-webui
-	url = https://github.com/Sunwood-ai-labs/ollama-webui.git
 [submodule "spellbook/langfuse"]
 	path = spellbook/langfuse
 	url = https://github.com/Sunwood-ai-labs/langfuse.git
