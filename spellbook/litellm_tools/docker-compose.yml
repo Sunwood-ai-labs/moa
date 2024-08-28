@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    volumes:  
+      - ./data/litellm/config.yaml:/app/config.yaml
+    ports:
+      - "${LITELLM_PROXY_PORT:-14365}:14365"
+    restart: unless-stopped
+    command:
+      - /bin/sh
+      - -c  
+      - |
+        pip install async_generator
+        litellm --config '/app/config.yaml' --debug --host ${LITELLM_PROXY_HOST:-0.0.0.0} --port 14365 --num_workers 8
+    entrypoint: []
+    env_file:
+      - ../../.env
