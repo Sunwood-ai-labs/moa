@@ -121,6 +121,24 @@ OPEN_WEBUI_PORT=8080
 
    このコマンドは、`spellbook`ディレクトリ内の`dify`サブディレクトリにあるDocker Compose設定ファイルを使用して、Difyサービスを起動します。
 
+##### Upgrade Dify
+
+```bash
+cd spellbook\dify\docker
+git pull origin main
+docker compose down
+docker compose pull
+docker compose up -d
+```
+
+#### litellm の起動方法
+
+   ```bash
+   docker-compose -f spellbook\litellm_tools\docker-compose.yml up
+   ```
+
+
+
 ## 📚 サンプルスクリプト
 
 AWS Bedrock や Claude AI、LiteLLM、Gemini APIなどの使用例を示すサンプルスクリプトが `example` ディレクトリに含まれています。詳細については、[example/README.md](example/README.md) を参照してください。 
