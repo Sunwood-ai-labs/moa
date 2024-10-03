@@ -75,3 +75,16 @@ model_list:
     litellm_params:
       model: bedrock/mistral.mixtral-8x7b-instruct-v0:1
       aws_region_name: us-east-1
+
+  - model_name: bedrock/amazon.titan-embed-text-v1
+    litellm_params:
+      model: bedrock/amazon.titan-embed-text-v1
+      aws_region_name: us-east-1
+  - model_name: bedrock/cohere.embed-english-v3
+    litellm_params:
+      model: bedrock/cohere.embed-english-v3
+      aws_region_name: us-east-1
+  - model_name: bedrock/cohere.embed-multilingual-v3
+    litellm_params:
+      model: bedrock/cohere.embed-multilingual-v3
+      aws_region_name: us-east-1
