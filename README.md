@@ -36,7 +36,7 @@ MOA (Magic of AWS) は、AWSの基盤技術を活用し、Dockerを通じて企�
 主な特徴:
 - AWS BedrockやAWS Cloud AIなどの最新AIサービスを手軽に試すことができます。
 - LiteLLMプロジェクトを利用して、多様なLLMモデルを統一的なインターフェースで活用できます。
-- Ollama WebUIを使い、独自のLLMモデルをチャットボットとして動作させることができます。
+- open webuiを使い、独自のLLMモデルをチャットボットとして動作させることができます。
 
 ## 🚀 始め方
 
@@ -77,40 +77,70 @@ OPEN_WEBUI_PORT=8080
 ```
 
 >[!IMPORTANT]
->`.env.example`ファイルに新しい環境変数 `OLLAMA_BASE_URL`, `WEBUI_SECRET_KEY`, `LITELLM_PROXY_HOST`, `OPEN_WEBUI_PORT` が追加されました。APIキーの設定も更新されています。
 >
 >機密性の高い AWS 認証情報を誤ってコミットしないように、必ず`.env`ファイルを`.gitignore`に追加してください。
 
 ### 使い方
 
-#### ollama webui
+#### open webui
 
 1. Visual Studio Codeでプロジェクトを開きます。
 
 2. VS Codeのターミナルを開き、以下のコマンドを実行してDockerコンテナをビルドし、起動します。
     ```bash
-    # Ollama WebUI を追加で起動
+    # open webui を追加で起動
     docker-compose -f docker-compose.ollama.yml up
     ```
 
 - ollama: LLMモデルを提供するメインのサービス。GPU利用の設定も可能。
-- open-webui: ollama WebUIを提供するサービス。デフォルトでポート8080をリッスン。
+- open-webui: open webuiを提供するサービス。デフォルトでポート8080をリッスン。
 - litellm: 各種LLMモデルへのアクセスを提供するサービス。
 
-#### ollama webui + langfuse の起動方法
+#### open webui + langfuse の起動方法
 
 1. 必要な環境変数を`.env`ファイルに設定します。`LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`が必要です。
-   ```plaintext
+   ```bash
    LANGFUSE_PUBLIC_KEY=your_langfuse_public_key
    LANGFUSE_SECRET_KEY=your_langfuse_secret_key
    ```
 
-2. 以下のコマンドを使用して、ollama webuiとlangfuseを含むすべての関連サービスを起動します。
+2. 以下のコマンドを使用して、open webuiとlangfuseを含むすべての関連サービスを起動します。
    ```bash
-   docker-compose -f docker-compose.ollama.yml -f langfuse/docker-compose.yml up
+   docker-compose -f docker-compose.ollama.yml -f spellbook/langfuse/docker-compose.yml up
    ```
 
    このコマンドにより、ollamaとlangfuse関連のサービスが一緒に起動されます。`langfuse`は`http://localhost:3000`でアクセス可能です。
+
+#### open webui + pipeline + langfuse の起動方法
+
+以下のコマンドを使用して、open webui、pipeline、およびlangfuseを含むすべての関連サービスを起動します：
+
+```bash
+docker-compose -f docker-compose.ollama.yml -f spellbook/langfuse/docker-compose.yml -f spellbook/docker-compose.pipelines.yml up
+```
+
+このコマンドの説明：
+- `-f docker-compose.ollama.yml`: ollamaとopen webuiのサービスを定義しているファイルを指定します。
+- `-f spellbook/langfuse/docker-compose.yml`: langfuseサービスの設定を含むファイルを指定します。
+- `-f docker-compose.pipelines.yml`: pipelinesサービスの設定を含むファイルを指定します。
+- `up`: 指定されたすべての設定ファイルに基づいてサービスを起動します。
+
+起動後の設定手順：
+
+1. [open-webui pipelines](https://github.com/open-webui/pipelines)をモデル設定から設定します。
+   - アクセスURL: http://pipelines:9099
+   - デフォルトのパスワード: 0p3n-w3bu!
+
+2. [langfuse](https://langfuse.com/docs/integrations/litellm/tracing)でpublic_keyとsecret_keyを発行します。
+   - langfuseの管理画面にアクセスし、新しいプロジェクトを作成してキーを取得します。
+
+3. [`langfuse_filter_pipeline.py`](https://github.com/open-webui/pipelines/blob/main/examples/filters/langfuse_filter_pipeline.py)をパイプラインにインポートし、public_keyとsecret_keyを設定します。
+   - このステップでlangfuseとの連携が可能になります。
+
+4. [`conversation_turn_limit_filter`](https://github.com/open-webui/pipelines/blob/main/examples/filters/conversation_turn_limit_filter.py)をパイプラインにインポートして会話の制限を解除します。
+   - これにより、会話のターン数の制限がなくなり、より長い対話が可能になります。
+
+これらの手順を完了することで、open webui、pipeline、langfuseが統合された環境が整います。この環境では、高度なAI対話機能と詳細な分析・モニタリング機能を利用できます。
 
 #### Dify の起動方法
 
@@ -133,9 +163,9 @@ docker compose up -d
 
 #### litellm の起動方法
 
-   ```bash
-   docker-compose -f spellbook\litellm_tools\docker-compose.yml up
-   ```
+```bash
+docker-compose -f spellbook\litellm_tools\docker-compose.yml up
+```
 
 
 
@@ -208,7 +238,7 @@ MOA の開発に影響を与え、貢献してくれた以下のプロジェク�
 - [Streamlit](https://streamlit.io/)  
 - [LiteLLM](https://github.com/Lightning-AI/lit-llama)
 - [Langfuse](https://github.com/Sunwood-ai-labs/langfuse)
-- [OLLaMa WebUI](https://github.com/Sunwood-ai-labs/ollama-webui)
+- [open webui](https://github.com/Sunwood-ai-labs/ollama-webui)
 - [Gemini API](https://www.gemini.com/developers)
 - [Anthropic API](https://www.anthropic.com/)
 
