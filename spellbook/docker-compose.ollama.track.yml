@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    # ports:
+    #   - "11434:11434" 
+    volumes:
+      - ollama-moa2:/root/.ollama
+    env_file:
+      - .env
+    pull_policy: always
+    tty: true
+    restart: unless-stopped
+
+  open-webui:
+    build:
+      context: .
+      args:
+        OLLAMA_BASE_URL: '/ollama'
+      dockerfile: Dockerfile.openweb.ui
+      
+    image: ghcr.io/open-webui/open-webui:main
+    volumes:
+      - open-webui-moa2:/app/backend/data
+      - ./:/work
+    depends_on:
+      - ollama
+      - litellm
+    ports:
+      - ${OPEN_WEBUI_PORT-8181}:8080
+    env_file:
+      - .env
+    restart: unless-stopped
+
+  litellm:
+    image: ghcr.io/berriai/litellm:main-stable
+    volumes:
+      - ~/.aws:/root/.aws
+      - ./data/litellm/config.yaml:/config.yaml
+    command: [ "--config", "/config.yaml" ]
+    ports:
+      - "4000:4000" # Map the container port to the host, change the host port if necessary
+    environment:
+        DATABASE_URL: "postgresql://llmproxy:dbpassword9090@db:5432/litellm"
+        STORE_MODEL_IN_DB: "True" # allows adding models to proxy via UI
+    env_file:
+      - .env # Load local .env file
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: litellm
+      POSTGRES_USER: llmproxy
+      POSTGRES_PASSWORD: dbpassword9090
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d litellm -U llmproxy"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+  
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - prometheus_data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=15d'
+    restart: always
+
+volumes:
+  ollama-moa2: {}
+  open-webui-moa2: {}
+  prometheus_data: {}
