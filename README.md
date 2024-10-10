@@ -142,6 +142,14 @@ docker-compose -f docker-compose.ollama.yml -f spellbook/langfuse/docker-compose
 
 これらの手順を完了することで、open webui、pipeline、langfuseが統合された環境が整います。この環境では、高度なAI対話機能と詳細な分析・モニタリング機能を利用できます。
 
+> [!NOTE]
+> litellmの初期化のための下記のコマンドを実行してください
+> 
+> `sudo docker-compose exec litellm /bin/bash`
+>
+> `python db_scripts/create_views.py`
+
+
 #### Dify の起動方法
 
 1. Dify関連のサービスを起動するには、次のコマンドを実行します。
