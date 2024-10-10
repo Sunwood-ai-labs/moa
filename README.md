@@ -131,7 +131,7 @@ docker-compose -f docker-compose.ollama.yml -f spellbook/langfuse/docker-compose
    - アクセスURL: http://pipelines:9099
    - デフォルトのパスワード: 0p3n-w3bu!
 
-2. [langfuse](https://langfuse.com/docs/integrations/litellm/tracing)でpublic_keyとsecret_keyを発行します。
+2. [http://localhost:3000/](http://localhost:3000/)にアクセスして、[langfuse](https://langfuse.com/docs/integrations/litellm/tracing)でpublic_keyとsecret_keyを発行します。
    - langfuseの管理画面にアクセスし、新しいプロジェクトを作成してキーを取得します。
 
 3. [`langfuse_filter_pipeline.py`](https://github.com/open-webui/pipelines/blob/main/examples/filters/langfuse_filter_pipeline.py)をパイプラインにインポートし、public_keyとsecret_keyを設定します。
